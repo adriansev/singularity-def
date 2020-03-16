@@ -1,0 +1,26 @@
+Bootstrap: yum
+OSVersion: 7
+MirrorURL: http://monitor.spacescience.ro/mirrors/centos/7/os/x86_64/
+Include: yum
+
+%help
+    One can run directly a singularity .sif file (or just singularity run)
+    The argument is the name (without extension) of .nxs files found in root
+    The command that will be run :
+    /usr/NX/bin/nxclient --session /root/"${1}".nxs
+
+%environment
+    export PATH=${PATH}:/usr/NX/bin
+    export QT_X11_NO_MITSHM=1
+
+%files
+    ./NX        /usr/
+    gina.nxs    /usr/NX/
+    irene.nxs   /usr/NX/
+
+%post
+yum -y update && yum -y install libXft libXrender libXext xorg-x11-xauth && yum clean all && rm -rf /var/cache/yum ; \
+
+%runscript
+    exec /usr/NX/bin/nxclient --session /usr/NX/"${1}".nxs
+

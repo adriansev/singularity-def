@@ -1,0 +1,14 @@
+Bootstrap: yum
+OSVersion: 7
+MirrorURL: http://monitor.spacescience.ro/mirrors/centos/7/os/x86_64/
+UpdateURL: http://monitor.spacescience.ro/mirrors/centos/7/updates/x86_64/
+Include: yum
+
+%environment
+    export QT_X11_NO_MITSHM=1
+
+%post
+yum -y update && yum -y install openssh-clients && yum clean all && rm -rf /var/cache/yum ; \
+
+%runscript
+    exec /usr/bin/ssh "${@}"
