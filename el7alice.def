@@ -16,9 +16,9 @@ curl -fsSlk https://gist.githubusercontent.com/adriansev/60df81a5ed2e92182e635db
 
 
 %environment
-${CVMFS_ALIEN_CACHE:=${HOME}/cvmfs-cache}
+CVMFS_ALIEN_CACHE=${CVMFS_ALIEN_CACHE:="${HOME}/cvmfs-cache"}
 export CVMFS_ALIEN_CACHE
-
+mkdir -p {CVMFS_ALIEN_CACHE}
 export SINGULARITY_BIND="${CVMFS_ALIEN_CACHE}:/var/lib/cvmfs"
 
 #--fusemount "container:cvmfs2 $CONFIGREPO /cvmfs/$CONFIGREPO" \
