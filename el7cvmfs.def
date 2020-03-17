@@ -2,13 +2,10 @@ Bootstrap: yum
 OSVersion: 7
 MirrorURL: http://monitor.spacescience.ro/mirrors/centos/7/os/x86_64/
 UpdateURL: http://monitor.spacescience.ro/mirrors/centos/7/updates/x86_64/
-Include: yum curl yum-utils fuse3 fuse3-libs bash
+Include: yum curl yum-utils fuse fuse-libs fuse3 fuse3-libs bash util-linux sudo bindfs
 
 %files
-
-%startscript
-
-%help
+sudoers /etc/sudoers
 
 %environment
 
