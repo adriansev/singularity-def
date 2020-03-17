@@ -1,0 +1,21 @@
+Bootstrap: yum
+OSVersion: 7
+MirrorURL: http://monitor.spacescience.ro/mirrors/centos/7/os/x86_64/
+UpdateURL: http://monitor.spacescience.ro/mirrors/centos/7/updates/x86_64/
+Include: yum curl yum-utils fuse3 fuse3-libs bash
+
+%files
+
+%startscript
+
+%help
+
+%environment
+
+%post
+yum -y update && yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
+yum install -y cvmfs cvmfs-config-default cvmfs-fuse3;
+yum clean all && rm -rf /var/cache/yum;
+
+%runscript
+

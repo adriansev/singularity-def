@@ -4,11 +4,11 @@ CVMFS_DEBUGLOG=/tmp/cvmfs.log
 CVMFS_MAX_IPADDR_PER_PROXY=1
 ## CVMFS_IPFAMILY_PREFER=4
 
-CVMFS_REPOSITORIES=alice.cern.ch,alice-ocdb.cern.ch
+CVMFS_REPOSITORIES='alice.cern.ch,alice-ocdb.cern.ch'
 
 # local cache = 30 GiB
 CVMFS_QUOTA_LIMIT=30720
 
-${CVMFS_ALIEN_CACHE:=${HOME}/cvmfs-cache}
+CVMFS_ALIEN_CACHE="${CVMFS_ALIEN_CACHE:=${HOME}/cvmfs-cache}"
 CVMFS_PAC_URLS="/tmp/cvmfs.pac"
 

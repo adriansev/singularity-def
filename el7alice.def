@@ -8,17 +8,17 @@ Include: yum curl yum-utils fuse3 fuse3-libs
 default.local.alice /etc/cvmfs/default.local
 
 %startscript
-# let's get latest version of iss pac
-curl -fsSlk https://gist.githubusercontent.com/adriansev/60df81a5ed2e92182e635dbb0b283f94/raw/7087368bacab0427907e16214bbab05ef0e9c31d/cvmfs_iss.pac -o /tmp/cvmfs.pac
-
 
 %help
 
 
 %environment
+# let's get latest version of iss pac
+curl -fsSlk https://gist.githubusercontent.com/adriansev/60df81a5ed2e92182e635dbb0b283f94/raw/7087368bacab0427907e16214bbab05ef0e9c31d/cvmfs_iss.pac -o /tmp/cvmfs.pac
+
 CVMFS_ALIEN_CACHE=${CVMFS_ALIEN_CACHE:="${HOME}/cvmfs-cache"}
 export CVMFS_ALIEN_CACHE
-mkdir -p {CVMFS_ALIEN_CACHE}
+mkdir -p ${CVMFS_ALIEN_CACHE}
 export SINGULARITY_BIND="${CVMFS_ALIEN_CACHE}:/var/lib/cvmfs"
 
 #--fusemount "container:cvmfs2 $CONFIGREPO /cvmfs/$CONFIGREPO" \
