@@ -5,7 +5,7 @@ UpdateURL: http://monitor.spacescience.ro/mirrors/centos/7/updates/x86_64/
 Include: yum curl yum-utils fuse fuse-libs fuse3 fuse3-libs bash util-linux sudo bindfs
 
 %files
-default.local.alice /etc/cvmfs/default.local
+default.local.alice_pac /etc/cvmfs/default.local
 sudoers_cvmfs /etc/sudoers
 
 %environment
@@ -14,4 +14,22 @@ sudoers_cvmfs /etc/sudoers
 yum -y update && yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
 yum install -y cvmfs cvmfs-config-default cvmfs-fuse3;
 yum clean all && rm -rf /var/cache/yum;
+
+%runscript
+
+export PATH="/cvmfs/alice.cern.ch/bin:${PATH}"
+VERB="${1}"
+shift
+PKG="${1}"
+shift
+
+if [[ "${VERB}" == "load" ]]; then
+    eval $(/cvmfs/alice.cern.ch/bin/alienv printenv VO_ALICE@${PKG});
+elif [[ "${VERB}" == "enter" ]]; then
+    /cvmfs/alice.cern.ch/bin/alienv enter VO_ALICE@${PKG};
+else
+    echo "No loaded or entered environment; usage: ${0} load|enter PACKAGE_NAME"
+fi
+
+[[ -n "${@}" ]] && exec "${@}" || bash
 
