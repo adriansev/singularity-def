@@ -5,7 +5,7 @@ UpdateURL: http://monitor.spacescience.ro/mirrors/centos/7/updates/x86_64/
 Include: yum curl yum-utils fuse fuse-libs fuse3 fuse3-libs bash util-linux sudo bindfs
 
 %files
-sudoers /etc/sudoers
+sudoers_cvmfs /etc/sudoers
 
 %environment
 
