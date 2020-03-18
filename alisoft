@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+CACHE="$HOME/cvmfs-cache"
+mkdir -p ${CACHE}
+
+[[ "${1}" == "cleanup" ]] && { rm -rf ${CACHE}/* ; exit; }
+
+[[ -z "${SINGULARITY_BINDPATH}" ]] && export SINGULARITY_BINDPATH="${CACHE}:/var/lib/cvmfs"
+[[ -z "${SINGULARITY_SCRATCHDIR}" ]] && export SINGULARITY_SCRATCHDIR="/var/run/cvmfs"
+
+CVMFS_REPOSITORIES="alice.cern.ch,alice-ocdb.cern.ch"
+declare -a FUSEMOUNT_ARGS
+IFS=',' read -ra repo_list <<< "${CVMFS_REPOSITORIES}"
+for i in "${repo_list[@]}" ; do
+    FUSEMOUNT_ARGS+=(--fusemount "\"container:cvmfs2 ${i} /cvmfs/${i}\"")
+done
+
+singularity run "${FUSEMOUNT_ARGS[@]}" el7alice "${@}"
+
