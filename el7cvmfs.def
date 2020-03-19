@@ -45,6 +45,4 @@ yum install -y cvmfs cvmfs-config-default cvmfs-fuse3;
 rm -rf /var/cache/yum;
 
 %runscript
-
-bash
-
+[[ -n "${@}" ]] && exec "${@}" || bash
