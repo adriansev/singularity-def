@@ -11,7 +11,7 @@ alisoft usage:
 alisoft load|enter PACKAGE_NAME command
 
 %files
-default.local.alice_pac /etc/cvmfs/default.local
+default.local_pac /etc/cvmfs/default.local
 sudoers_cvmfs /etc/sudoers
 
 %environment

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 CACHE="$HOME/cvmfs-cache"
 mkdir -p ${CACHE}
@@ -8,7 +8,7 @@ mkdir -p ${CACHE}
 [[ -z "${SINGULARITY_BINDPATH}" ]] && export SINGULARITY_BINDPATH="${CACHE}:/var/lib/cvmfs"
 [[ -z "${SINGULARITY_SCRATCHDIR}" ]] && export SINGULARITY_SCRATCHDIR="/var/run/cvmfs"
 
-[[ -z "${CVMFS_REPOSITORIES}" ]] && export CVMFS_REPOSITORIES="alice.cern.ch,alice-ocdb.cern.ch"
+CVMFS_REPOSITORIES="alice.cern.ch,alice-ocdb.cern.ch"
 declare -a FUSEMOUNT_ARGS
 IFS=',' read -ra repo_list <<< "${CVMFS_REPOSITORIES}"
 for i in "${repo_list[@]}" ; do
