@@ -4,7 +4,8 @@ Collection of singularity recipes
 ## ALICE/CERN related containers
 There are two minimal containers with cvmfs included:
 * el7alice (HEP_OSlibs included)
-* el7cvmfs
+* el7cvmfs   
+These images can be downloaded from [**here**](http://asevcenc.web.cern.ch/asevcenc/singularity/)
 
 Given the Singularity requirements, the cvmfs mount can be done only from command line,   
 hence the need of wrapper scripts that will use these containers.
