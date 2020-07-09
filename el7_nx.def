@@ -1,7 +1,5 @@
-Bootstrap: yum
-OSVersion: 7
-MirrorURL: http://monitor.spacescience.ro/mirrors/centos/7/os/x86_64/
-Include: yum
+Bootstrap:docker
+From:centos:7
 
 %help
     One can run directly a singularity .sif file (or just singularity run)
